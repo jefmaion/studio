@@ -1,0 +1,44 @@
+.fc-event {
+    margin: 1px;
+    height: 40px;
+    box-shadow: none !important;
+    cursor: pointer;
+}
+
+.fc-time-grid .fc-slats td {
+    height: 60px;
+    border-bottom: 0;
+    cursor: pointer;
+}
+.risk {
+    text-decoration: line-through
+}
+
+.fc-event.fc-event-remark {
+    color:#000 !important;
+    cursor: default !important;
+}
+
+.fc-border-yellow  {
+    /* border-color: var(--orange) !important; */
+    background-color: rgb(255, 255, 243) !important;
+}
+
+/* .fc-now-indicator.fc-now-indicator-arrow::before {
+    background-color: #ef6c00;
+    content: "";
+    display: block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-top: -7px;
+  } */
+  
+  .fc-now-indicator.fc-now-indicator-arrow {
+    left: 44px !important;
+    right: 0;
+    background-color: #ef6c00;
+    height: 2px;
+    margin: 0;
+    border: none;
+  }
