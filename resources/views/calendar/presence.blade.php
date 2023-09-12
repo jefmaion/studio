@@ -27,7 +27,7 @@
 
                     <div class="col-12 form-group">
                         <label>Evolução da Aula</label>
-                        <x-form.textarea name="evolution" rows="5">{{ $class->evolution }}</x-form.textarea>
+                        <x-form.text-area name="evolution" rows="5">{{ $class->evolution }}</x-form.text-area>
                     </div>
 
                     <div class="col-12 form-group" >

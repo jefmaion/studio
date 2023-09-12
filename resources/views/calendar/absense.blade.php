@@ -34,8 +34,8 @@
 
                             <div class="col-12 form-group">
                                 <label>Comentários</label>
-                                <x-form.textarea name="absense_comments" rows="4">{{ $class->absense_comments }}
-                                </x-form.textarea>
+                                <x-form.text-area name="absense_comments" rows="4">{{ $class->absense_comments }}
+                                </x-form.text-area>
                             </div>
                         </div>
 

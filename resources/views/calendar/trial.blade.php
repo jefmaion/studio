@@ -102,7 +102,7 @@
 
                         <div class="col-12 form-group">
                             <label>Observações</label>
-                            <x-form.textarea name="class[comments]" rows="3"></x-form.textarea>
+                            <x-form.text-area name="class[comments]" rows="3"></x-form.text-area>
                         </div>
 
 

@@ -101,9 +101,9 @@
                                                         <div class="modal-body">
                                                             <p>Deseja realmente cancelar essa matrícula?</p>
 
-                                                            <x-form.textarea name="comments" rows="5"
+                                                            <x-form.text-area name="comments" rows="5"
                                                                 placeholder="Motivo do cancelamento" value="">
-                                                            </x-form.textarea>
+                                                            </x-form.text-area>
 
                                                             <x-form.switch-button class="mt-2" name="remove_class">
                                                                 Excluir aulas não realizadas</x-form.switch-button>

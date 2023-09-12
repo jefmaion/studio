@@ -48,8 +48,8 @@
 
             <div class="col-12 form-group">
                 <label>Observações</label>
-                <x-form.textarea name="comments" rows="5">{{ old('comments', $registration->comments) }}
-                </x-form.textarea>
+                <x-form.text-area name="comments" rows="5">{{ old('comments', $registration->comments) }}
+                </x-form.text-area>
             </div>
 
         
@@ -136,8 +136,8 @@
 
     <div class="col form-group">
         <label>Observações</label>
-        <x-form.textarea name="comments" rows="2">{{ old('comments', $registration->comments) }}
-        </x-form.textarea>
+        <x-form.text-area name="comments" rows="2">{{ old('comments', $registration->comments) }}
+        </x-form.text-area>
     </div>
 </div>
 <div class="row">
