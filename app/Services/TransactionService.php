@@ -42,7 +42,7 @@ class TransactionService extends Service {
     public function listReceiptToDataTable() {
 
         $data = Transaction::where('type', 'R')->get();
-
+        $response = [];
         foreach($data as $item) {
 
 
