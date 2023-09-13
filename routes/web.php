@@ -47,10 +47,13 @@ Route::post('class/remark', [ClassesController::class, 'remark'])->name('class.r
 Route::resource('class', ClassesController::class);
 
 
+Route::get('account/receivable/{id}/receive', [AccountReceivable::class, 'receive'])->name('receivable.receive');
+Route::post('account/receivable/fees', [AccountReceivable::class, 'fees'])->name('receivable.fees');
 Route::resource('account/receivable', AccountReceivable::class);
 
 Route::get('user/zipcode/{zipcode}', [UserController::class, 'zipcodeApi'])->name('user.zipcode');
 Route::get('user/find/{phone}', [UserController::class, 'find'])->name('user.find');
+Route::post('user/photo/{user}', [UserController::class, 'avatarUpload'])->name('user.photo');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

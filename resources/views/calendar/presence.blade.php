@@ -30,6 +30,7 @@
                         <x-form.text-area name="evolution" rows="5">{{ $class->evolution }}</x-form.text-area>
                     </div>
 
+                    @if($class->student->evolutions->count())
                     <div class="col-12 form-group" >
                         <strong>Últimas Evoluções</strong>
                         <hr>
@@ -37,6 +38,7 @@
                             @include('calendar.parts.evolution', ['evolutions' => $class->student->evolutions])
                         </div>
                     </div>
+                    @endif
                 </div>
                 
             </div>

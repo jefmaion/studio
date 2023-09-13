@@ -61,7 +61,7 @@ class StudentService extends Service {
 
             $response[] = [
                 'id' => $item->id,
-                'name' => '<img alt="image" src="http://127.0.0.1:8000/template/assets/img/users/user-3.png" class="rounded-circle mr-2" width="35"><a href="'.route('student.show', $item).'">'. $item->user->name.'</a>',
+                'name' => '<img alt="image" src="'.avatar($item->user->avatar).'" class="rounded-circle mr-2" width="35"><a href="'.route('student.show', $item).'">'. $item->user->name.'</a>',
                 'modalities' => ($item->modalities) ?  implode(' • ', $item->modalities) : '',
                 'phone_wpp' => $item->user->phone_wpp,
                 'created_at' => $item->created_at->format('d/m/Y'),

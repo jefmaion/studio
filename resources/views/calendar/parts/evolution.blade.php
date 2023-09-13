@@ -1,7 +1,7 @@
 <ul class="list-unstyled list-unstyled-border list-unstyled-noborder">
     @foreach($evolutions as $finished)
     <li class="media">
-    <img alt="image" class="mr-3 rounded-circle" width="35" src="http://127.0.0.1:8000/template/assets/img/users/user-3.png">
+    <img alt="image" class="mr-3 rounded-circle" width="35" src="{{ avatar($finished->instructor->user->avatar) }}">
     <div class="media-body">
         
         <div class="media-title mb-1">{{ $finished->date->format('d/m/Y') }} - {{ $finished->typeText }}</div>

@@ -37,6 +37,10 @@ class Student extends BaseModel
         return $this->hasMany(Transaction::class);
     }
 
+    public function getOverdueInstallmentsAttribute() {
+        return $this->installments()->where('status', 0)->whereDate('date', '<=', date('Y-m-d'));
+    }
+
 
     public function getModalitiesAttribute() {
 

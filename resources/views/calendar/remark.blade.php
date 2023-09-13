@@ -6,9 +6,13 @@
     padding: 0;
 }
 
+.is-invalid-select2 {
+        border-color: rgb(185, 74, 72) !important;
+    }
+
     </style>
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content ">
 
             <div class="modal-header p-3">
                 <h5 class="modal-title">
@@ -23,32 +27,29 @@
 
             <form id="form-remark" action="{{ route('class.remark') }}" method="post">
                 @csrf
+
+                <input type="hidden" name="date" value="{{ $data[0] }}" />
+                <input type="hidden" name="time" value="{{ $data[1] }}" />
+
                 <div class="modal-body">
+
+                    <h3 class="mb-3">{{ dateExt($data[0]) }} às {{ $data[1] }}</h3>
                     <div class="row">
-
-
-                        <div class="col-6 form-group">
-                            <label>Data</label>
-                            <x-form.input type="date" name="date" value="{{ $data[0] }}" />
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label>Horario</label>
-
-                            <x-form.select name="time" value="{{ $data[1] }}" :options="classTime()" />
-                        </div>
-
-                        <div class="col-12 form-group">
-                            <label>Professor</label>
-
-                            <x-form.select class="select2" name="instructor_id" :options="$instructors" />
-                        </div>
 
                         <div class="col-12 form-group">
                             <label>Aula a ser reposta</label>
 
                             <x-form.select class="select2" name="class_id" :options="$classes" />
                         </div>
+
+                       
+                        <div class="col-12 form-group">
+                            <label>Professor</label>
+
+                            <x-form.select class="select2" name="instructor_id" :options="$instructors" />
+                        </div>
+
+                      
 
                         
                     </div>
@@ -64,7 +65,7 @@
 
                     <button type="submit" class="btn btn-success">
                         <i class="fas fa-check-circle    "></i>
-                        Registrar Presença
+                        Agendar Reposição
                     </button>
 
                 </div>
@@ -82,9 +83,13 @@
             dropdownParent: $("#modal-remark")
         });
 
+    //     $(".select2").select2();
+    // $('.select2').addClass('w-100');
+    // $('.select2.is-invalid, .select2-image.is-invalid').addClass('is-invalid-select2').next().find('.select2-selection').addClass('is-invalid-select2')
+    
+    // $(".select2 + span").addClass("is-invalid");
 
-    
-    
+
     $('#form-remark').submit(function (e) { 
         e.preventDefault();
     
@@ -100,7 +105,13 @@
             error: function(response) {
                 $('.is-invalid').removeClass('is-invalid')
                 $.each(response.responseJSON.errors, function (name, message) { 
-                    $('[name="'+name+'"]').addClass('is-invalid').next().html(message[0])
+
+                    if($('[name="'+name+'"]').hasClass('select2')) {
+                        $('[name="'+name+'"]').addClass('is-invalid').next().find('.select2-selection').addClass('is-invalid-select2')
+                        $('[name="'+name+'"]').next().next().html(message[0])
+                    } else {
+                        $('[name="'+name+'"]').addClass('is-invalid').next().html(message[0])
+                    }
                 });
             
             }

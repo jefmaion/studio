@@ -71,6 +71,8 @@ class StudentController extends Controller
             return redirect()->route('student.index')->with('warning','Aluno não encontrado!');
         }
         
+        
+
         return view('student.show', compact('student'));
     }
 

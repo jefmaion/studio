@@ -37,4 +37,20 @@ class StoreInstructorModalityRequest extends FormRequest
             'remuneration_value' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'modality_id.unique' => 'Essa modalidade já está cadastrada',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'modality_id'        => 'Modalidade',
+            'remuneration_type'  => 'Tipo de Remuneração',
+            'remuneration_value' => 'Valor da Remuneração',
+        ];
+    }
 }

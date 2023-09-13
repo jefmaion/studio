@@ -11,7 +11,7 @@
     <button type="button" class="btn btn-lg bg-orange remark-alert d-none mb-3" onclick="setRemark(false)">
         <h5 class="m-0">Cancelar Reagendamento</h5>
     </button>
-    {{-- <div class="row">
+    <div class="row">
         <div class="col form-group">
             <label>Instrutor</label>
             <x-form.select class="item-calendar select2" name="_instructor_id" :options="$instructors" value="" />
@@ -34,7 +34,7 @@
             <x-form.select class="item-calendar select2" name="_status"
                 :options="[0 => 'Agendada', 1 => 'Realizada', 2 => 'Falta Com Aviso', 3 => 'Falta']" />
         </div>
-    </div> --}}
+    </div>
     <div id="calendar-class"></div>
 </x-card>
 <div id="modals">
@@ -127,7 +127,7 @@
                             url: 'calendar/context/' + date.format(),
                             success: function(doc) {
 
-
+                                console.log(jsEvent)
 
                                 $('#context').remove()
 
@@ -139,8 +139,8 @@
                                 });
      
 
-                                $('#context').css('top',  (jsEvent.clientY) +  'px');
-                                $('#context').css('left',  (jsEvent.clientX) +  'px');
+                                $('#context').css('top',  (jsEvent.pageY) +  'px');
+                                $('#context').css('left',  (jsEvent.pageX) +  'px');
 
                                 
                             }

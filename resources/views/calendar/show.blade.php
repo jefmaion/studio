@@ -12,9 +12,8 @@
 
             <div class="modal-header bg-whitesmoke  p-3 modal-class-{{ $class->id }}">
                 <h5 class="modal-title">
-                    <i class="fas fa-info-circle  drag-area  "></i>
-                    Aula em {{ $class->date->format('d/m/Y') }} às {{ date('H\hi', strtotime($class->time)) }} - {{
-                    $class->situation }}
+                    
+                    {{ $class->situation }} - {{ dateExt($class->date) }} às {{ $class->time }}  
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span>&times;</span>
@@ -27,48 +26,58 @@
 
                     <div class="col-12 mb-1">
                         @include('calendar.header')
+                        
                     </div>
 
                     <div class="col-12">
+
+
                         <ul class="nav nav-tabs nasv-fill" id="myTab" role="tablist">
 
-                            @if(count($class->pendencies()) > 0)
+   
                             <li class="nav-item ">
                                 <a class="nav-link active" id="home-tab-{{ $class->id }}" data-toggle="tab" href="#home-{{ $class->id }}" role="tab" aria-controls="home" aria-selected="true">
-                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Pendências
+                                    <i class="fas fa-chart-line    "></i> Evoluções
                                 </a>
                             </li>
-                            @endif
 
-                            @if($class->student->evolutions->count())
-                            <li class="nav-item">
-                                <a class="nav-link" id="contact-tab-{{ $class->id }}" data-toggle="tab" href="#contact-{{ $class->id }}" role="tab" aria-controls="contact" aria-selected="false">
-                                    <i class="fas fa-chart-line    "></i> Evoluçoes
+                            <li class="nav-item ">
+                                <a class="nav-link" id="info-tab-{{ $class->id }}" data-toggle="tab" href="#info-{{ $class->id }}" role="tab" aria-controls="info" aria-selected="true">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> Informações da Aula
                                 </a>
                             </li>
-                            @endif
+                    
 
+     
                         </ul>
                         <div class="tab-content" id="myTabContent">
-                            @if(count($class->pendencies()) > 0)
+           
                             <div class="tab-pane fade active show nicescroll" id="home-{{ $class->id }}" role="tabpanel" aria-labelledby="home-tab-{{ $class->id }}">
-                                {{-- Pendecias --}}
-                                
-                                    @foreach( $class->pendencies() as $pendecy)
-                                        <span class="badge badge-pill badge-primary">{{ $pendecy }}</span> 
-                                    @endforeach
-                                
-                            </div>
-                            @endif
-                            
-                            @if($class->student->evolutions->count() > 0)
-                            <div class="tab-pane fade" id="contact-{{ $class->id }}" role="tabpanel"
-                                aria-labelledby="contact-tab-{{ $class->id }}">
+                                @if($class->student->evolutions->count())
                                 <div class="scroll">
                                     @include('calendar.parts.evolution', ['evolutions' => $class->student->evolutions])
                                 </div>
+                                @else
+                                    <p>{{ $class->student->user->nickname }} não possui nenhuma evolução cadastrada. </p>
+                                @endif
+                               
                             </div>
-                            @endif
+
+                            <div class="tab-pane fadenicescroll" id="info-{{ $class->id }}" role="tabpanel" aria-labelledby="info-tab-{{ $class->id }}">
+                                <p></p>
+                                <p></p>
+
+                                <ul class="list-unstyled">
+                                    <li><strong>Status da aula: </strong><span class="badge badge-pill badge-{{ $class->bgColor }} bg-{{ $class->bgColor }}">{{ $class->situation }}</span></li>
+                                    @if(!empty($class->absense_comments))
+                                    <li><strong>Motivo: </strong>{{ $class->absense_comments }}</li>
+                                    @endif
+                                  </ul>
+                               
+                            </div>
+           
+                            
+             
                         </div>
                     </div>
                 </div>
@@ -83,6 +92,12 @@
                 </button>
 
                 @if(!$class->finished)
+
+                <a class="btn btn-light tesxt-white open-view"
+                    href="{{ route('calendar.edit', [$class, 'action=cancel']) }}">
+                    <i class="fas fa-user-times"></i>
+                    Cancelar Aula
+                </a>
 
                 <a class="btn btn-danger text-white open-view"
                     href="{{ route('calendar.edit', [$class, 'action=absense']) }}">

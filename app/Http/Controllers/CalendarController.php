@@ -6,6 +6,7 @@ use App\Models\Classes;
 use App\Models\Instructor;
 use App\Models\Modality;
 use App\Models\PaymentMethod;
+use App\Models\Student;
 use App\Models\User;
 use App\Services\ClassService;
 use Carbon\Carbon;
@@ -30,10 +31,26 @@ class CalendarController extends Controller
     {
 
         if($request->ajax()) {
-            return $this->classes->listToCalendar($request->input('start'), $request->input('end'));
+            return $this->classes->listToCalendar($request->all());
         }
 
-        return view('calendar.index');
+        $instructors = Instructor::with('user')->get()->toArray();
+        $instructors = array_map(function($item) {
+            return [$item['id'], $item['user']['name']];
+        }, $instructors);  
+
+        $students = Student::with('user')->get()->toArray();
+        $students = array_map(function($item) {
+            return [$item['id'], $item['user']['name']];
+        }, $students);  
+
+
+        $modalities = Modality::get()->toArray();
+        $modalities = array_map(function($item) {
+            return [$item['id'], $item['name']];
+        }, $modalities);  
+
+        return view('calendar.index', compact('instructors', 'modalities', 'students'));
     }
 
     /**
@@ -102,6 +119,13 @@ class CalendarController extends Controller
             ];
         }
 
+        if($view == 'cancel') {
+            $data = [
+                'title'  => 'Cancelar Aula',
+                'status' => 4
+            ];
+        }
+
 
         return view('calendar.'.$view, compact('class', 'data'));
     }
@@ -156,6 +180,7 @@ class CalendarController extends Controller
     }
 
     public function trial($data) {
+
         $data = explode(' ', $data);
 
         $instructors = Instructor::with('user')->get()->toArray();

@@ -8,5 +8,6 @@ dataTable('.datatable', {
         {data: 'status'},
         
         {data: 'description'},
+        {data: 'actions'},
     ]
 })

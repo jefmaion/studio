@@ -13,7 +13,12 @@
             <div class="card-header">
                 <h4>Ficha do Aluno</h4>
             </div>
+
+            
+
             <div class="padding-20">
+
+
                 <ul class="nav nav-tabs" id="myTab2" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link  active" id="home-tab2" data-toggle="tab" href="#about" role="tab"
@@ -158,18 +163,16 @@
                             <tbody>
                                 @foreach($student->classes as $class)
                                 <tr>
-                                    <td scope="row">{{ $class->date->format('d/m/Y') }}</td>
-                                    <td>{{ $class->time }}</td>
+                                    <td scope="row">{{ $class->date->format('d/m/Y') }} {{ $class->day }}</td>
+                                    <td>{{ date('H:i', strtotime($class->time)) }}</td>
                                     <td>{{ $class->modality->name }}</td>
                                     <td>{{ $class->typeText }}</td>
                                     <td>
-                                        <img alt="image" src="{{ asset('template/assets/img/users/user-3.png') }}"
-                                            class="rounded-circle mr-2" width="35">
+                                        <img alt="image" src="{{ avatar($class->instructor->user->avatar) }}" class="rounded-circle mr-2" width="35">
                                         {{ $class->instructor->user->name }}
                                     </td>
                                     <td>
-                                        <span class="badge badge-pill badge-{{  $class->bgColor  }}">{{
-                                            $class->situation }}</span>
+                                        <span class="badge badge-pill badge-{{  $class->bgColor  }}">{{$class->situation }}</span>
                                     </td>
 
                                 </tr>
@@ -201,7 +204,7 @@
                                     <td scope="row">{{ $installment->date->format('d/m/Y') }}</td>
                                     <td>{{ currency($installment->amount) }}</td>
                                     <td>{{ $installment->method->name }}</td>
-                                    <td>{{ $class->situation }}</td>
+                                    <td><span class="badge bagde-pill badge-{{ $installment->bgColor }}">{{ $installment->situation }}</span> </td>
                                     <td><a name="" id="" class="btn btn-primary" href="#" role="button">Recebeer</a>
                                     </td>
                                 </tr>

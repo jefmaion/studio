@@ -40,19 +40,31 @@ class RegistrationService extends Service {
 
         $registration = Registration::create($data);
 
+        $dueDate = date('Y-m-'.$data['due_day']);
 
-        Transaction::create([
-            'date' => date('Y-m-'.$data['due_day']),
-            'type' => 'R',
-            'value' => $data['value'],
-            'amount' => $data['value'],
-            'status' => 0,
-            'description' => 'Mensalidade ' . $student->user->shortName,
+        for($i=1; $i<=$data['duration'];$i++) {
 
-            'payment_method_id' => $paymentMethod,
-            'student_id' => $student->id,
-            'registration_id' => $registration->id,
-        ]);
+            if($i > 1 && isset($data['other_payment_method_id'])) {
+                $paymentMethod = $data['other_payment_method_id'];
+            }
+
+            Transaction::create([
+                'date' => $dueDate,
+                'type' => 'R',
+                'value' => $data['value'],
+                'amount' => $data['value'],
+                'status' => 0,
+                'description' => 'Mensalidade ' . $student->user->shortName,
+    
+                'payment_method_id' => $paymentMethod,
+                'student_id' => $student->id,
+                'registration_id' => $registration->id,
+            ]);
+
+            $dueDate = date('Y-m-d', strtotime($dueDate . ' + 1 months'));
+        }
+
+        
 
 
         $cls = [];

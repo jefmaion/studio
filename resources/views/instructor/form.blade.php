@@ -1,11 +1,11 @@
 
 
-<h5 class="mb-3">Dados Pessoais</h5>
-<hr>
+<p class="m-0"><strong>Dados Pessoais</strong></p class="m-0">
+<hr class="m-0 mb-2">
 @include('user.form')
 
-<h5 class="my-3">Dados Complementares</h5>
-<hr>
+<p class="m-0"><strong>Informações Profissionais</strong></p class="m-0">
+<hr class="m-0 mb-2">
 <div class="row">
 
     <div class="col form-group">

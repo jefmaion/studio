@@ -4,7 +4,7 @@
 
 @section('content')
 <form action="{{ route('instructor.update', $instructor) }}" method="post">
-    <x-card style="primary" title="Editar Aluno">
+    <x-card style="primary" title="Editar Professor">
         @csrf
         @method('PUT')
         @include('instructor.form', ['user' => $instructor->user])

@@ -32,6 +32,10 @@ class Classes extends Model
         return $this->belongsTo(Registration::class);
     }
 
+    public function getDayAttribute() {
+        return classWeek($this->weekday);
+    }
+
     public function getTypeTextAttribute() {
         $types = [
             'AN' => 'Aula Normal',
@@ -48,8 +52,8 @@ class Classes extends Model
 
         $pendencies = [];
 
-        if($this->status == 2 && $this->has_replacement == 0 && $this->type != 'AE') {
-            $pendencies[] = 'Aula de reposição não agendada';
+        if(in_array($this->status, [2,4]) && $this->has_replacement == 0 && $this->type != 'AE') {
+            $pendencies[] = 'Reposição não agendada';
         }
 
         return $pendencies;
@@ -73,7 +77,11 @@ class Classes extends Model
                 
             case 3:
                 return 'Falta';
-                break;                
+                break;    
+                
+            case 4:
+                return 'Cancelada';
+                break;    
             
             default:
                 return '(Não Definido)';
@@ -96,7 +104,7 @@ class Classes extends Model
         }
 
         if($this->status == 0 && $this->type == 'AE') {
-            return 'grey';
+            return 'purple';
         }
 
         if($this->status == 1) {
@@ -109,6 +117,10 @@ class Classes extends Model
 
         if($this->status == 3) {
             return 'danger';
+        }
+
+        if($this->status == 4) {
+            return 'grey';
         }
 
         if(!isset($bgClassStatus[$this->type])) {

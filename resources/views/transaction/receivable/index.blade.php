@@ -15,9 +15,9 @@
 
     <div class="row align-items-center">
         <div class="col">
-            <a class="btn btn-success " href="{{ route('student.create') }}" role="button">
+            <a class="btn btn-success " href="{{ route('receivable.create') }}" role="button">
                 <i class="fas fa-plus-circle    "></i>
-                Novo Aluno
+                Adicionar Conta
             </a>
         </div>
     </div>

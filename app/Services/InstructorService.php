@@ -57,7 +57,7 @@ class InstructorService extends Service {
         foreach($data as $item) {
             $response[] = [
                 'id' => $item->id,
-                'name' => '<a href="'.route('instructor.show', $item).'">'. $item->user->name.'</a>',
+                'name' => '<img alt="image" src="'.avatar($item->user->avatar).'" class="rounded-circle mr-2" width="35"><a href="'.route('instructor.show', $item).'">'. $item->user->name.'</a>',
                 'profession' => $item->profession,
                 'phone_wpp' => $item->user->phone_wpp,
                 'created_at' => $item->created_at->format('d/m/Y'),

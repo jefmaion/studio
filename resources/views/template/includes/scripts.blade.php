@@ -11,4 +11,7 @@
 
 <script>
     // $("body").niceScroll();
+    if($('.alert-message').length > 0) {
+            $('.alert-message').delay(5000).fadeOut(500)
+        }
 </script>

@@ -26,12 +26,11 @@ class StoreRegistrationRequest extends FormRequest
     {
 
 
-
         return [
             // 'student_id' => 'required',
             'modality_id' => ['required', 
                                 Rule::unique('registrations')->where(function($query) {
-                                    return $query->where('student_id', $this->student_id)->where('modality_id', $this->modality_id)->where('status', 1);
+                                    return $query->where('student_id', $this->student->id)->whereNull('deleted_at')->where('modality_id', $this->modality_id)->where('status', 1);
                                 }),    
                             ],
             'duration' => 'required',

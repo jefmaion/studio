@@ -10,3 +10,8 @@
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="{{ asset('template/assets/css/custom.css') }}">
   <link rel='shortcut icon' type='image/x-icon' href='{{ asset('template/assets/img/favicon.ico') }}' />
+  <style>
+        .is-invalid-select2 {
+        border-color: #dc3545 !important;
+    }
+  </style>

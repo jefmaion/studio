@@ -6,7 +6,7 @@
             data-feather="align-justify"></i></a></li>
       
       <li class="d-flex align-items-center m-0">
-		<h5 class="mr-auto m-0">Olá {{ auth()->user()->first_name }}</h5>
+		<h5 class="mr-auto m-0">Olá {{ auth()->user()->firstName }}</h5>
         {{-- <form class="form-inline mr-auto">
           <div class="search-element">
             <input class="form-control" type="search" placeholder="Search" aria-label="Search" data-width="200">
@@ -147,10 +147,9 @@
         <div class="dropdown-divider"></div>
 
 
-        <form method="POST" action="http://127.0.0.1:8000/logout">
+        <form method="POST" action="{{ route('logout') }}">
           @csrf
-          <a href="{{ route('logout')}}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault();
-        this.closest('form').submit();"> <i class="fas fa-sign-out-alt"></i>
+          <a href="{{ route('logout')}}" class="dropdown-item has-icon text-danger" onclick="event.preventDefault(); this.closest('form').submit();"> <i class="fas fa-sign-out-alt"></i>
             Logout
           </a>
         </form>

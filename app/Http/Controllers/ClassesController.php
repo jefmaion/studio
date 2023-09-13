@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Http\Requests\StoreClassesRequest;
+use App\Http\Requests\StoreRemarkClassRequest;
 use App\Http\Requests\UpdateClassesRequest;
 use App\Models\Instructor;
 use App\Models\Modality;
@@ -130,7 +131,7 @@ class ClassesController extends Controller
     }
 
 
-    public function remark(Request $request) {
+    public function remark(StoreRemarkClassRequest $request) {
         $data = $request->except(['_method', '_token']);
 
         $class = $this->classes->findClass($data['class_id']);

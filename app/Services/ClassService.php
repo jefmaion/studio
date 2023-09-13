@@ -35,6 +35,7 @@ class ClassService extends Service {
     
         $data['class']['scheduled_instructor_id'] = $data['class']['instructor_id'];
         $data['class']['student_id']  = $studentId;
+        $data['class']['weekday'] = date('w', strtotime($data['class']['date']));
 
 
         if(isset($data['transaction']['value'])) {
@@ -94,7 +95,7 @@ class ClassService extends Service {
         return json_encode(['data' => $response]);
     }
 
-    public function listToCalendar($start, $end) {
+    public function listToCalendar($params) {
 
         $bgClassStatus = [
             0 => 'bg-primary',
@@ -103,14 +104,45 @@ class ClassService extends Service {
             3 => 'bg-red'
         ];
 
+        $start = $params['start'];
+        $end = $params['end'];
+
         $calendar = [];
-        $raw = [];
-        $data = Classes::with(['student.user', 'registration', 'modality'])->whereBetween('date', [$start, $end])->get();
+        $rs     = Classes::with(['student.user', 'registration', 'modality'])->whereBetween('date', [$start, $end]);
+
+
+        $params = array_diff_key($params, array_flip(['_', 'start', 'end']));
+
+        foreach ($params as $key => $value) {
+            if ($value == "") continue;
+            $key = ltrim($key, $key[0]);
+            $rs->where($key, $value);
+        }
+
+
+        $data = $rs->get();
+        $iconPendency =  '<i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i> ';
 
         foreach($data as $item) {
 
+            $icon = '';
 
-            $title = '<div class="mb-0"><b>' .  $item->student->user->shortName . '</b></div>';
+            if($item->student->OverdueInstallments->count()) {
+                $icon = $iconPendency;
+            }
+
+            if($item->pendencies()) {
+                $icon = $iconPendency;
+            }
+
+    
+            // @foreach( $class->pendencies() as $pendecy)
+            // <span class="badge badge-pill badge-primary"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  {{ $pendecy }}</span> 
+            // @endforeach
+
+
+
+            $title = '<div class="mb-0">'.$icon.'<b>' . date('H\h', strtotime($item->time)) .' '.  $item->student->user->firstName . '</b></div>';
             $title .= $item->modality->acronym;
             $title .= ' • ' . $item->type;
 

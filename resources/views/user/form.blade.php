@@ -5,18 +5,18 @@
         <div class="row">
             
             <div class="col-2 form-group">
-                <label>CPF</label>
+                <label>CPF*</label>
                 <x-form.input name="cpf" class="cpf" value="{{ old('cpf', $user->cpf) }}" />
             </div>
         
         
             <div class="col-6 form-group">
-                <label>Nome</label>
+                <label>Nome*</label>
                 <x-form.input name="name" value="{{ old('name', $user->name) }}" />
             </div>
 
             <div class="col-2 form-group">
-                <label>Data de Nascimento</label>
+                <label>Data de Nascimento*</label>
                 <x-form.input type="date" name="birth_date" value="{{ old('birth_date', $user->birth_date) }}" />
             </div>
 
@@ -28,12 +28,12 @@
             
         
             <div class="col-2 form-group">
-                <label>Sexo</label>
+                <label>Sexo*</label>
                 <x-form.select name="gender" :options="['M' => 'Masculino', 'F' => 'Feminino']" value="{{ old('gender', $user->gender) }}" />
             </div>
 
             <div class="col-2 form-group">
-                <label>Telefone (WhatsApp)</label>
+                <label>Telefone (WhatsApp)*</label>
                 <x-form.input type="text" class="sp_celphones" name="phone_wpp"
                     value="{{ old('phone_wpp', $user->phone_wpp) }}" />
             </div>

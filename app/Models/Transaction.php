@@ -9,10 +9,30 @@ class Transaction extends BaseModel
 {
     use HasFactory;
 
-    protected $dates = ['date'];
+    protected $dates = ['date', 'pay_date'];
+
+    private $_type = [
+        'R' => [
+            'label' => 'Receitas',
+            'color' => 'success'
+        ],
+
+        'D' => [
+            'label' => 'Despesas',
+            'color' => 'danger'
+        ]
+    ];
 
     public function method() {
         return $this->belongsTo(PaymentMethod::class, 'payment_method_id', 'id');
+    }
+
+    public function getTypeTransactionAttribute() {
+        return $this->_type[$this->type]['label'];
+    }
+
+    public function getColorTransactionAttribute() {
+        return $this->_type[$this->type]['color'];
     }
 
     public function getSituationAttribute() {
@@ -30,7 +50,7 @@ class Transaction extends BaseModel
         }
 
         if($this->date->format('Y-m-d') > date('Y-m-d') && $this->status == 0) {
-            return 'Agendada';
+            return 'Aberto';
         }
 
         if($this->date->format('Y-m-d') < date('Y-m-d') && $this->status == 0) {

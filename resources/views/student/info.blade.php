@@ -1,8 +1,9 @@
+@include('user.photo', ['user' => $student->user])
+
 <div class="card author-box ">
     <div class="card-body">
         <div class="author-box-center">
-            <img alt="image" src="{{ asset('template/assets/img/users/user-1.png') }}"
-                class="rounded-circle author-box-picture">
+            <img alt="image" src="{{ avatar($student->user->avatar) }}" class="rounded-circle author-box-picture">
             <div class="clearfix"></div>
             <div class="author-box-name">
                 <a href="#">{{ $student->user->name }}</a>
@@ -43,6 +44,9 @@
                     <x-delete-button class="dropdown-item has-icon" route="{{ route('student.destroy', $student) }}"><i
                             class="fas fa-trash-alt"></i>
                         Excluir</x-delete-button>
+                    
+                        <a class="dropdown-item has-icon pick-photo" href="#" ><i
+                            class="fas fa-pencil-alt    "></i> Alterar Foto</a>
                 </div>
             </div>
 

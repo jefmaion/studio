@@ -321,6 +321,7 @@ $(function () {
   if (jQuery().select2) {
     $(".select2").select2();
     $('.select2').addClass('w-100');
+    $('.select2.is-invalid, .select2-image.is-invalid').addClass('is-invalid-select2').next().find('.select2-selection').addClass('is-invalid-select2')
   }
 
   // Selectric

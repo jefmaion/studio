@@ -35,6 +35,18 @@ class InstructorModalityController extends Controller
         return view('instructor.modality.index', compact('instructor', 'modalities'));
     }
 
+    public function create(Instructor $instructor) {
+
+        $modalities = Modality::get()->toArray();
+
+        $modalities = array_map(function($item) {
+            return [$item['id'], $item['name']];
+        }, $modalities);       
+
+
+        return view('instructor.modality.form',compact('instructor', 'modalities'));
+    }
+
     /**
      * Store a newly created resource in storage.
      *

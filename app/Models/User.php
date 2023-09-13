@@ -61,6 +61,11 @@ class User extends Authenticatable
         return Carbon::parse($this->birth_date)->age;
     }
 
+    public function getFirstNameAttribute() {
+        $name = explode(" ", $this->name);
+        return $name[0];
+    }
+
     public function getShortNameAttribute() {
         $name = explode(" ", $this->name);
 
@@ -69,6 +74,14 @@ class User extends Authenticatable
         }
 
         return $name[0] .' '.end($name);
+    }
+
+    public function getNicknameAttribute() {
+        if(empty($this->nickname)) {
+            return $this->firstName;
+        }
+
+        return $this->nickname;
     }
 
     public function getGenderNameAttribute() {

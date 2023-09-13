@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 if (!function_exists('classTime')) {
     function classTime() {
         return  [
@@ -75,9 +77,23 @@ if(!function_exists('classTypes')) {
     }
 }
 
+
 if(!function_exists('image')) {
     function image($src) {
         return sprintf('<img alt="image" src="%s" class="rounded-circle" width="35" data-toggle="tooltip">', $src);
+    }
+}
+
+if(!function_exists('avatar')) {
+    function avatar($image=null) {
+
+        $imgDefault = 'images/avatar.jpg';
+
+        if(empty($image) || !file_exists(public_path('images/' . $image))) {
+            return asset($imgDefault);
+        }
+
+        return asset('images/' . $image);
     }
 }
 
@@ -98,6 +114,23 @@ if(!function_exists('currency')) {
         }
         
         return number_format($value, 2, ",", ".");
+    }
+}
+
+if(!function_exists('dateExt')) {
+    function dateExt($date) {
+
+        $date = Carbon::parse($date)->locale('pt-BR');
+
+        $w = date('w', strtotime($date));
+
+
+        $weekdayName = classWeek($w);
+
+        
+
+        return $weekdayName.', ' . $date->translatedFormat('d \d\e F \d\e Y');
+
     }
 }
 
