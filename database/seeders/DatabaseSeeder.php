@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ModalitySeeder::class,
             InstructorSeeder::class,
-            StudentSeeder::class,
+            // StudentSeeder::class,
             PaymentMethodSeeder::class,
-            RegistrationSeeder::class
+            // RegistrationSeeder::class
         ]);
     }
 }
